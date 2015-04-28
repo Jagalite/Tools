@@ -1,0 +1,51 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class Main {
+        public static void main(String[] args) throws Exception {
+        	
+        	
+        	XXX xxx = new XXX("Hello!");
+        	save(xxx);
+        	
+        	
+        	//Cast read object!
+        	//System.out.println( ((XXX) load()).getString());
+        }
+        
+        //Save any object to file
+        public static void save(Object object) throws Exception {
+        	ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(fileName));
+            output.writeObject(object);
+            output.flush();
+            output.close();
+        }
+        
+        //Read object from file
+        public static Object load() throws Exception {
+        	ObjectInputStream input = new ObjectInputStream(new FileInputStream(fileName));
+            Object object = input.readObject();
+            return object;
+        }
+        
+        private static String fileName = "text.txt";
+}
+
+//Test class
+class XXX implements java.io.Serializable {
+	public XXX(String s) {
+		this.s = s;
+	}
+	
+	public void setString(String s) {
+		this.s = s;
+	}
+	
+	public String getString() {
+		return s;
+	}
+	
+	String s;
+}
